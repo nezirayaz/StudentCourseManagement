@@ -1,0 +1,62 @@
+@model StudentCourseManagement.Models.Student
+
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-plus"></i> Add New Student
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="AddStudent" method="post">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="mb-3">
+                            <label asp-for="FirstName" class="form-label"></label>
+                            <input asp-for="FirstName" class="form-control" placeholder="Enter first name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="LastName" class="form-label"></label>
+                            <input asp-for="LastName" class="form-control" placeholder="Enter last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="StudentNumber" class="form-label"></label>
+                            <input asp-for="StudentNumber" class="form-control" placeholder="e.g., 20230001" />
+                            <span asp-validation-for="StudentNumber" class="text-danger"></span>
+                            <small class="form-text text-muted">Must be 6-10 digits</small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="student@university.edu" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-arrow-left"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Add Student
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

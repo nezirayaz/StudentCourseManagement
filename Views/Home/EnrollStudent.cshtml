@@ -1,0 +1,71 @@
+@{
+    ViewData["Title"] = "Enroll Student";
+    var course = ViewBag.Course as StudentCourseManagement.Models.Course;
+    var students = ViewBag.Students as List<StudentCourseManagement.Models.Student>;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="bi bi-person-plus"></i> Enroll Student in Course
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <strong>Course:</strong> @course.CourseCode - @course.CourseName<br />
+                        <strong>Instructor:</strong> @(course.Instructor?.FullTitle ?? "Not assigned")<br />
+                        <strong>Currently Enrolled:</strong> @course.EnrolledStudents.Count student(s)
+                    </div>
+
+                    @if (students == null || !students.Any())
+                    {
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle"></i> No students available. <a asp-action="AddStudent">Add a student first</a>.
+                        </div>
+                    }
+                    else
+                    {
+                        <form asp-action="EnrollStudent" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="courseId" value="@course.Id" />
+
+                            <div class="mb-3">
+                                <label for="studentId" class="form-label">Select Student</label>
+                                <select name="studentId" id="studentId" class="form-select" required>
+                                    <option value="">-- Select a Student --</option>
+                                    @foreach (var student in students)
+                                    {
+                                        var isEnrolled = course.EnrolledStudents.Any(s => s.Id == student.Id);
+                                        if (!isEnrolled)
+                                        {
+                                            <option value="@student.Id">@student.FullName - @student.StudentNumber</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            @if (course.EnrolledStudents.Count >= students.Count)
+                            {
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> All available students are already enrolled in this course.
+                                </div>
+                            }
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a asp-action="CourseDetails" asp-route-id="@course.Id" class="btn btn-secondary">
+                                    <i class="bi bi-arrow-left"></i> Cancel
+                                </a>
+                                <button type="submit" class="btn btn-primary" @(course.EnrolledStudents.Count >= students.Count ? "disabled" : "")>
+                                    <i class="bi bi-check-circle"></i> Enroll Student
+                                </button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

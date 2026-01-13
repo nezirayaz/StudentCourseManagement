@@ -1,0 +1,108 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Student Course Management System</h1>
+        <p class="lead text-muted">A comprehensive system to manage students, instructors, and courses</p>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="card text-center border-primary">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Students</h5>
+                    <p class="display-4">@ViewBag.StudentCount</p>
+                    <a href="@Url.Action("ListStudents")" class="btn btn-outline-primary">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center border-success">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Instructors</h5>
+                    <p class="display-4">@ViewBag.InstructorCount</p>
+                    <a href="@Url.Action("ListInstructors")" class="btn btn-outline-success">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center border-info">
+                <div class="card-body">
+                    <h5 class="card-title text-info">Courses</h5>
+                    <p class="display-4">@ViewBag.CourseCount</p>
+                    <a href="@Url.Action("ListCourses")" class="btn btn-outline-info">View All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Actions Section -->
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="mb-4">Quick Actions</h3>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-person-plus"></i> Manage Students
+                    </h5>
+                    <p class="card-text">Add new students and view the complete student list.</p>
+                    <a href="@Url.Action("AddStudent")" class="btn btn-primary me-2">Add Student</a>
+                    <a href="@Url.Action("ListStudents")" class="btn btn-outline-primary">List Students</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-person-badge"></i> Manage Instructors
+                    </h5>
+                    <p class="card-text">Add new instructors and view all faculty members.</p>
+                    <a href="@Url.Action("AddInstructor")" class="btn btn-success me-2">Add Instructor</a>
+                    <a href="@Url.Action("ListInstructors")" class="btn btn-outline-success">List Instructors</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-book"></i> Manage Courses
+                    </h5>
+                    <p class="card-text">Add new courses and manage course enrollments.</p>
+                    <a href="@Url.Action("AddCourse")" class="btn btn-info me-2">Add Course</a>
+                    <a href="@Url.Action("ListCourses")" class="btn btn-outline-info">List Courses</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <h5 class="alert-heading">
+                    <i class="bi bi-info-circle"></i> System Features
+                </h5>
+                <ul class="mb-0">
+                    <li>Add and manage students with validation</li>
+                    <li>Add and manage instructors with academic titles</li>
+                    <li>Create courses and assign instructors</li>
+                    <li>Enroll students in courses</li>
+                    <li>View detailed course information with enrolled students</li>
+                    <li>Pre-loaded with sample data for demonstration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
